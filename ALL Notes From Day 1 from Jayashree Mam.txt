@@ -1,0 +1,61 @@
+1st session-advance java
+
+Who?
+Completed core java 100%
+sql and web tech--knowledge
+
+What?---30-35 classes
+API-jdbc,servlet,jsp
+FRAMEWORK-hibernate,spring(core,mvc,boot)
+
+2hr-7-9am(mon-sat)
+90% execution
+10% theory--explain paint,notepad---i will execute
+you have to execute in class itself
+
+notes shared on qtalk...
+
+softwares:
+1.eclipse ide--enterprised edition
+2.Mysql database
+
+mock ratings...
+1.response
+2.task--done and shared on qtalk
+http://3.final assesment 
+
+eclipse link to download 
+
+https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-09/R/eclipse-jee-2024-09-R-win32-x86_64.zip 
+
+
+mysql video for installation:
+
+https://youtu.be/Sfvpgu9ID2Q?si=BtoKgWUpam88a8VA
+https://youtu.be/vQPBNCvboSo?si=eiXxmjsjwa8729ZW
+
+unistall video:https://youtu.be/lRPyHZ1hRLU?si=Sm1TSyQ1gpZlLqwb 
+
+
+
+/*
+ * use object of PrintWriter class present in http://java.io pkg
+ * getWriter() present in HttpServletResponse
+ * non static method --gives you object of PrintWriter
+ */
+/*
+ * servlet class : should have properties of server
+ * --have a unique url : @WebServlet("/give url")
+ * '/' is mandatory ,if you miss this ,server will not get started
+ * give this annotation above the class
+ * --take req and send response
+ * inherit a inbuilt class called HttpServlet class present in
+ * javax.servlet pkg
+ * override doGet() Method and specify our code
+ * 
+ * 
+ * to execute servlet class
+ * 1.start the server
+ * 2.give the url of your class in browser
+ * 		[http://localhost:8080/servlets-first/apple]
+ */ 

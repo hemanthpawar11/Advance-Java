@@ -1,0 +1,94 @@
+JDBC
+why we need jdbc?
+
+Data-raw fact or info
+important, that there is necessity to store it
+
+store data-core java?
+variables,array,objects,collection
+
+data stored in them ,are they store permanently?No...
+
+Using Java,How to store data permanently?
+2 ways
+Files		Database(place we store data in organized manner)
+FileHandling	JDBC
+java.io pkg	java.sql pkg
+
+Among 2 ,database has lot of advantages
+
+Files				Database
+redundancy			tables-constraints
+(duplication of data)		pk,unique...
+
+fetching data from		fetching data from multiple
+multiple files is 		table is easy,Why?becoz tables
+difficult-bcoz 			tables are connected-foreign key
+files are not connected
+
+files less security		provide more security
+-------------------------------------------------------
+What JDBC-Java Database Connectivity
+def?jdbc helps us to connect java application with db application
+Jdbc as an Api
+
+API?-Application Programming Interface
+What?a software
+API helps 2 different application to communicate with each other
+
+java app    JDBC-api	Database
+(java pl)		sql
+data-------------------->store
+
+2 person
+1.Hindi		2.English
+	3rd person(Hindi&English)
+-----------------------------------------------------------------
+work flow
+
+where jdbc is present?no downloading
+in jdk only
+
+Java<--->jdbc(java+sql)<---->DB
+
+imp:
+jdbc converts java understandable lan to commom db
+understandable lang(common sql syntax) but not to
+specific syntax
+
+java---jdbc--common sql syntax--mysql Driver software--mysql syntax--mysql db
+java--jdbc---common syntax----postgre driver software---postgre syntax--postgre db
+
+Who gives DS?DB vendors
+Where it is present?outside java
+do we have to download it?yes download and add it to you project
+
+DB
+many types : sql syntax changes little(max/maximum)
+MySql
+PostgreSql
+Mongo
+Oracle......
+-------------------------------------------
+how to add DS in our project?
+2 ways
+Jar file		Dependency
+JavaProject		MavenProject
+---------------------------------
+download jar file	add 4 lines of code
+extract it
+add it to project
+configure the location
+---------------------------------
+to create maven webapp project:
+---------------------------------
+go to File--New--select Maven Project--
+check the box of create simple project--
+click on next--
+--give group id(package name):com
+ and artifact id(project name):jdbc-first 
+--click on finish.
+look at right bottom corner of eclipse
+where project building happens
+wait until 100% completion
+

@@ -1,0 +1,34 @@
+After:
+Creating maven project
+Add dependency.....
+
+using java we can do CRUD operation on DB
+java---jdbc--common sql syntax--mysql Driver software--mysql syntax--mysql db
+5 steps
+1.Load or Register the Driver class
+2.Create Connection
+3.Create Statement
+4.Execute Query
+5.Close Connection
+
+1.Load or Register the Driver class?
+Why?------------
+dependency--MySql DriverSoftware-- have packages(com.mysql.cj.jdbc)---
+in this package we an imp class called 'Driver'.
+load this Driver class into java memory
+How?-----------
+2 ways:
+1.using forName() method
+	a)forName() is present in inbuilt class called 'Class'(java.lang pkg):no import
+b)method is static method : ClassName.methodName();
+c)accepts one String argument : pass FullyQualifiedClassName of Driver class[com.mysql.cj.jdbc.Driver]
+FullyQualifiedClassName : packageName.ClassName;
+Ex: java.util.Scanner; java.lang.String;
+d)method throws checked exception called ClassNotFoundException
+(compiler aware exception,force you to handle it)
+=====================================================
+2.using registerDriver() method
+a)registerDriver() present in class called 'DriverManager'(java.sql pkg):need import 
+b)registerDriver() is static method
+c)accept object of Driver class(com.mysql.cj.jdbc pkg) as argument :need import
+d) this method throws checked exception called SQLException 

@@ -1,0 +1,14 @@
+4.Execute Query
+
+execute() : all types of queries ,return type boolean
+executeUpdate() : non select queries(DML) ,return type int
+executeQuery() : select queries , return type ResultSet Object 
+
+all 3 present in Statement interface ,non static method
+it take String arg : query
+throws SQLException : handle it
+
+5.close connection
+close() present in Connection interface,non static
+throws SQLException : handle it
+

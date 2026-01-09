@@ -1,0 +1,46 @@
+2.Create Connection...
+
+house=======water flows=========water-resource
+
+java========data flow===========db
+data-------------------store
+
+java needs few info about db:
+1.url-jdbc:mysql://localhost:3306/schemaName
+in mysql workbench--we have to create schema and give for it--
+same name has to be given in url
+2.user & password
+root     root
+
+how?
+getConnection(s,s,s): present in Class called DriverManager(java.sql pkg-need import)
+static method
+3 string arguments-url,user,password
+throws checked SQLException-handle it
+
+getConnection(s) :
+1 string arg : Query-String
+url?data(key=value) format
+jdbc:mysql://localhost:3306/schemaName?user=root&password=root
+-------------------------------------------
+3.Create Statement
+we create a container(object) to hold queries
+
+java==================db
+java(object)	      sql(queries)
+
+create object in java--acts like a container--hold query
+
+java[obj(query)]-----jdbc-------take query----->db
+		   obj , query
+
+Statement object
+Statement  is interface present in java.sql pkg
+use createStatement() present in Connection interface
+non static method
+throws SQLException : handle it
+method return Statement type obj
+
+
+
+

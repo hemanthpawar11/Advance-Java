@@ -1,0 +1,166 @@
+JDBC(java to database connectivity)
+It is an API used to establish connection between java to database.
+
+API(application programming interface)
+It is a software that heps two application to communicate with each other.
+
+How does JDBC helps to connect java to database(theory)?
+ When we have both java application and database application  ,and we want those 
+to communicate with each other ,but java does not understand sql language and database does not understand java language.
+Now we need one mechanism which takes java statements and converts it into database understandable language,
+and to convert database response into java understandable language, for that we have our JDBC API.
+
+Now jdbc API will take java statements and converts into database understable language and sends the request,
+now database will understand it and does respective work.
+
+When database will take the information ,it gives to jdbc API and it will converts particular database into java understandable language.
+So jdbc will act as interface between java to database.
+
+Note:
+• Jdbc api will convert java language into database understandable language,
+but it never converts java to particular mysql database language.
+For that we need mysql driver software.
+
+Jdbc api alone cannot convert java into particular mysql database language, 
+inorder to do it we need a driver software,which is provided by database vendors.
+Since it is a third party application to use it, we need to integrate it, for that we need to add the dependency.
+
+Driver:
+ It is a class which is present in com.mysql.cj.jdbc package(since we are using mysql database)
+We need this to convert database language into particular mysql database language.
+
+to create maven webapp project:
+---------------------------------
+go to File--New--select Maven Project--
+check the box of create simple project--
+click on next--
+--give group id(package name):com
+ and artifact id(project name):jdbc-first 
+--click on finish.
+
+5-Steps to achieve connection between java to database using jdbc:
+1.Load (or) Register the driver
+2.Create connection
+3.Establish statement
+4.Execute query
+5.Close connection
+
+1.Load (or) Register the driver
+ To use Driver class,we need to bring that into our java memory.
+We can load our driver class into java memory in 2 ways ,either we can load (or) register but not both at a time.
+
+a)Register Driver Class:
+
+Step1.create the object of driver class--[Driver driver= new Driver();]
+import it from com.mysql.cj.jdbc package.
+
+Step2. Ask the DriverManager to register the driver.
+ DriverManager is a class present in java.sql package.
+In this class we have a static method that is –registerDriver(Driver reference),
+which accept Driver object reference as a parameter.
+So,
+ [DriverManager.regesterDriver(driver);]
+-pass the driver object reference to the particular method ,then it is going to register your driver class into java memory.
+
+As soon as we write that line ,it will throw checked exception(SQLException) handle it by using try and catch.
+--------------------------------------------------------
+b)Loading the Driver:
+[Class.forName(“com.mysql.cj.jdbc.Driver”);]
+
+Class is class present in java.lang package, in that class we have a static method called as forName() 
+which will accept a string argument ,where we will pass a FullyQualifiedClassName of the 
+mysql Driver provided by database vendors.
+This method loads our driver class into memeory.
+Driver object creation and registerDriver() both throws
+ checked exception(SQLException) handle it by using try and catch.
+====================================================================
+2.create connection
+We create a connection between java to database by passing three things:
+1.url 2.username 3.password
+url- “jdbc:mysql://localhost:3306/databaseName”
+username-“root”
+password-“root.
+
+We have getConnection() which is public static method present in DriverManager class,
+this method is used to build the connection between java to database.
+
+Mainly we have 3 getconnection() ,which is overloaded method:
+1.getConnection(string url, String username ,String password) ;
+2.getConnection(String url);
+3.getConnection(properties file,String url);
+
+1.getConnection(string url, String username ,String password) ;
+ Here we have a getConnection() method ,which accept three string arguments ,
+where will pass url inorder to get database location and password and username to unlock database.
+[DriverManager.getConnection(url,username,password);]
+ This line will throw you the checked exception SQLException, handle it.
+----------------------------------------------------------------------------
+2.getConnection(String url)
+ This method accept single string where we will pass user,password,url in one string
+String url-
+“jdbc:mysql://localhost:3306/databasename?user=root&password=root”
+
+3.getConnection(properties file,String url);
+
+These methods are the example for built-in overloaded methods.
+These methods will return the object of Connection type.
+[Connection connection=DriverManager.getConnection();]
+Since connection is an interface we cannot able to create an object directly ,so we have getConnection() method. 
+Connection is an interface present in java.sql package
+connection objects gets created only if url,password,username are accurate ,if any one is wrong the getconnection() not all create an object, 
+instead it will throw you an sqlExeception.
+
+3.create Statement:
+We can create statement in 2 ways 
+1.Statement 2.PreparedStaement
+
+1.Statement
+[ Statement statement = connection.createStatement();]
+- Statement is a interface present in java.sql package.
+- We can get statement object by calling createStatement method.
+- createStatement() throws SQLException.
+- generally statement object used to execute static query.
+
+2.PreparedStatement
+-PreapresStatement is an interface present in java.sql package.
+-It is child of Statement interface.
+-we can get the PreparedStatement object by calling prepareStatement().
+-prepareStatement() method throws the SQLException.
+-PreparedStatement generally used to execute the dynamic queries.
+-it is used to execute parameterised query ,we use the delimeter(?)and pass the value to it by using setter method,
+we prefer prepareStatement over an Statement to execute any query dynamically.
+
+4.Execute Querry
+
+ This step is important inorder to insert the query inside the database
+Here we have three methods inorder to execute the querries:
+
+1.execute():
+ Used to execute both select and non-select queries 
+-it return Boolean value 
+Returns true if query is successfully executed.
+2.exceuteUpdate():
+ This method used to execute only non-select queries
+-Return type of this method is int 
+It will return the value that how many rows are effected. 
+3.executeQuery():
+ This method is used to execute only select queries,Where this method will return the ResultSet object.
+ 
+5.close connection
+ It is one of the important part in our jdbc,Because if we don’t close the connection ,it will leads the connection memory leakage.
+-the safe pattern in java is to close connection always.
+
+ResultSet:
+It is an interface ,present in java.sql package 
+It holds the set of data’s return by executeQuery()
+-result set will act as cursor ,where it will point above the table initially,And to make cursor to point first row of the given table we will make 
+use of next() ,where this method helps us to move the cursor to nextline 
+next():
+- it is present inside ResultSet interface ,where it has boolean return type .
+- if there any row existed in the next position it will return true.
+- if there is no existed in the next position ,it will return us a false.
+
+To fecth the data from resultset we have  getX(column index)
+-these method will fecth the value from particular column based on its index. 
+X—represents datatype of a data.
+==========================================================================================
