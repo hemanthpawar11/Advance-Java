@@ -59,3 +59,115 @@ unistall video:https://youtu.be/lRPyHZ1hRLU?si=Sm1TSyQ1gpZlLqwb
  * 2.give the url of your class in browser
  * 		[http://localhost:8080/servlets-first/apple]
  */ 
+
+
+
+
+Create servlet web app maven project  employee-servlet-jdbc .
+Add servlet and mysql dependency.
+Create a database called employee-servlet-jdbc.
+Create a table called employee with columns id,name,email,password,salary.
+Create a register.html form and accept id,name,email,password,salary in form
+Create a servlet class RegisterEmployee and read data from register.html form 
+do necessary convertions and 
+store it in database using PrepareStatement.
+here no main method is used 
+write everything in doGet() method itself
+
+create servlet class in which you fetch one emp data from table
+transfer data to another servlet class and display details in
+console and browser 
+
+create login.html in which create a form to accept email and password:
+read data in servlet class .... use email and password as condition
+and fetch emp from table
+if details are coming---login sucsess
+if not---login failure----display same login form again
+ 
+
+Jan 12 - 8:29 am
+
+
+* in jdbc 5 steps
+ * in hibernate 3 steps : javax.persistence pkg
+ * we have create 3 objects
+ * all 3 are interface
+ * 1.EntityManagerFactory--1st and 2nd step
+ * call createEntityManagerFactory("vikas") : present in Persistence class
+ * static method
+ * String argument : persistence unit name(find it in persistence.xml file)
+ * give object of EntityManagerFactory
+ * 
+ * 2.EntityManager----3rd step
+ * call createEntityManager() : present in EntityManagerFactory
+ * non static method
+ * give EntityManager object
+ * inbuilt methods to perform crud operation
+ * insert--persist()
+ * update--merge()
+ * delete--remove()
+ * fetch---find()
+ * customized query---createQuery()
+ * 
+ * 3.EntityTransaction---4th and 5th step
+ * call getTransaction() : present in EntityManager
+ * non static method
+ * 2 imp method
+ * begin()----start the operation
+ * commit()---save the operation done
+ * 
+ * 
+ * Entity Class : hibernate create table
+ * Rules to create an Entity class
+--class should be annotated with @Entity
+--entity class must have one primary key( id )to a row  for easy identification of objects  and annotated with @Id 
+--class must be public non abstract class.
+--class should have public zero parameterized constructor or public default constructor.
+--for every variable of entity class there should be public getter and setter methods.
+
+ 
+
+Jan 19 - 7:06 am
+
+
+
+
+
+
+
+Dear Students,
+
+This is to inform you that you will be attending an **online quiz** tomorrow(4/02/2026) as per the schedule mentioned below. Kindly read all the instructions carefully and follow them strictly.
+
+**Important Instructions:**
+• The quiz must be attempted **ONLY on a Laptop 
+• Navigating to other tabs or applications during the quiz will be considered **malpractice**
+• Ensure you have a **stable internet connection** before starting
+• Required internet speed: **5–10 Mbps**
+• Read all instructions carefully before attending the quiz
+
+**Preparation Videos :
+• [https://youtu.be/h0m2XW3KuEM?si=pVAkzsmXfqDykC2K](https://youtu.be/h0m2XW3KuEM?si=pVAkzsmXfqDykC2K)
+• [https://youtu.be/vHesznQ63mQ?si=1V_764oxXxqFzulx](https://youtu.be/vHesznQ63mQ?si=1V_764oxXxqFzulx)
+
+**Quiz Link:**
+[https://topbrains.com/v1/quiz/assign/e71fce85-dcac-4adb-89aa-06d5463877bb](https://topbrains.com/v1/quiz/assign/e71fce85-dcac-4adb-89aa-06d5463877bb)
+
+**Quiz Details:**
+• Duration: **60 minutes**
+• Timer starts **immediately after login**
+• Login credentials: **Use the same credentials as the classroom**
+• New users must **register first**
+• Link will be active from **8:00 AM to 7:00 PM**
+
+**Technical Support:**
+📞 9972068008
+
+All students are requested to be punctual and complete the quiz within the given time window.
+ 
+
+Feb 03 - 10:49 pm
+
+
+
+

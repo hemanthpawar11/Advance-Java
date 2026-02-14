@@ -1,0 +1,28 @@
+Framework : collection of inbuilt class,interface,methods,logics
+which makes app development easier
+
+Hibernate FW
+java based , perform CRUD operations on database
+alternative for jdbc
+lot advantages
+
+			jdbc		hibernate
+schema creation		we		hiber--piece of code
+table creation		we		auto--annotation
+pk value generation     we		int pk-automate value generation
+checked exceptions	we		itself
+multiple table		no		mapping--fk
+queries			we		inbuilt methods
+
+java----hibernate-----jdbc----database----mysqlDS----MySqlDb
+-----------------------------------------------------------
+Create maven simple project : 
+Add hibernate,mysql ds dependency
+Add persistence.xml file : 
+under src/main/resources ---create one foleder
+select src/main/resources---right click on it---new--select folder
+-----give foldername as 'META-INF'----click on finish
+select META-INF---right click on it----new ---select file
+---give filename as 'persistence.xml'----click on finish
+
+

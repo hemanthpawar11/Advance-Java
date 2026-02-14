@@ -1,0 +1,18 @@
+String query="INSERT INTO student VALUES(101,'tom',90.5,'tom@gmail.com')";
+String query="UPDATE student SET email='jerry@gmail.com' WHERE stuid=101";
+String query="SELECT * FROM student WHERE stuid=101";
+
+queries--data did we take it from user?No
+static queries		
+cannot reused
+Statement object
+-------------------------------------------------
+data take it from user----dynamic query--reused
+PreparedStatement object
+PreparedStatement is a sub interface of Statement present in java.sql pkg
+how to get PS obj?
+
+call prepareStatement(query)---present in Connection interface
+non static method
+throw SQLException
+accepts one String argument : query
