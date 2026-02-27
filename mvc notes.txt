@@ -1,0 +1,363 @@
+Spring MVC
+A spring mvc is sub framework of of spring framework.
+It is built on top of servlet api.
+It follows Model-View-Controller design pattern.
+It implements all the basic features of core spring framework like inversion of control and dependency injection.
+A spring mvc provides an elegant solution to use MVC in spring framework by the help of DispatcherServlet.
+
+
+MVC pattern stands for Model-View-Controller pattern.
+
+--Model - A model contains the data of the application. A data can be a single object or a collection of objects.
+--Controller - A controller contains the business logic of an application. Here, the @Controller annotation is used to mark the class as the controller.
+--View - A view represents the provided information in a particular format. Generally, JSP is used to create a view page. 
+--Front Controller - In Spring Web MVC, the DispatcherServlet class works as the front controller. It is responsible to manage the flow of the Spring MVC application.
+ DispatcherServlet is a class that receives the incoming request and maps it to the right resource such as controller,models and views
+DispatcherServlet that handles all the Http requests and responses.
+
+Why spring mvc
+-Separate roles - The Spring MVC separates each role, where the model object, controller, command object, view resolver, DispatcherServlet, validator, etc. can be fulfilled by a specialized object.
+-Light-weight - It uses light-weight servlet container to develop and deploy your application.
+-Powerful Configuration - It provides a robust configuration for both framework and application classes.
+-Rapid development - The Spring MVC facilitates fast and parallel development.
+-Reusable business code - Instead of creating new objects, it allows us to use the existing business objects.
+-Easy to test - In Spring, generally we create JavaBeans classes that enable you to inject test data using the setter methods.
+-Flexible Mapping - It provides the specific annotations that easily redirect the page.
+
+
+How to create springmvc project?
+Create maven webapp project
+Add springmvc 6.0.9 and jakarta servlet 6.0.0 dependencies in pom.xml
+Make java compiler version to 1.8 
+
+Creating spring mvc maven project and making XML based configuration
+
+1.Create one student.jsp file under webapp
+<body>
+<h1>hii hello how are you</h1>
+</body>
+
+2.Create a package under src/main  name as com.ty
+	create a class here called TestController
+
+@Controller
+public class TestController {
+	
+	@GetMapping("/hii")
+	public String sample() {
+		return "student.jsp";
+	}
+
+}
+
+Creating spring mvc maven project and making annotation based configuration
+1.Create a jsp called student.jsp
+2.Create package in src/main called as com.ty
+ and create configuration class called StudentConfig
+
+3.
+@Configuration
+@ComponentScan(basePackages = "com.ty")
+public class StudentConfig {
+
+}
+
+4.Create a initializer class to initialize DispatcherServlet class
+public class StudentInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return null;
+	}
+
+//all configuration class must be mapped here
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class [] {StudentConfig.class};
+	}
+
+//need to create mapping ,so that all request goes to DispatcherServlet
+	@Override
+	protected String[] getServletMappings() {
+		return new String [] {"/"};
+	}
+
+}
+
+5.Need to scan the base package
+create a xml file in WEB-INF folder as student-servlet.xml
+add the spring core configuration and the tag
+<context:component-scan base-package="com.ty"></context:component-scan>
+
+
+5.Add tomcat 10.1 server and run the project
+give the url "hii" so that student.jsp is triggered.
+--------------------------------------------------------------------------------------------------------
+How Spring web mvc works:
+
+-Initially all the incoming request is intercepted by the DispatcherServlet that works as the front controller.
+-The DispatcherServlet gets an entry of handler mapping from the XML file and forwards the request to the controller.
+-The controller returns an object of ModelAndView.
+-The DispatcherServlet checks the entry of view resolver in the XML file and invokes the specified view component.
+
+(Annotation Configuration):
+How Spring Web MVC works 
+
+Initially, all incoming HTTP requests are intercepted by the DispatcherServlet, which acts as the Front Controller.
+The DispatcherServlet uses @RequestMapping annotations to identify the appropriate controller method to handle the request.
+The controller method processes the request and typically returns a ModelAndView object or a logical view name along with model data.
+The DispatcherServlet consults a ViewResolver bean (configured via Java-based configuration using @Bean in a @Configuration class) to resolve the logical view name into an actual view (e.g., JSP).
+The resolved view is rendered, and the final response is sent back to the client.
+--------------------------------------------------------------------------
+Spring MVC – Notes Q&A
+
+1. Introduction to Spring MVC
+Spring MVC is a Java-based web framework developed as a part of the Spring Framework to build robust, 
+scalable, and loosely coupled web applications.
+It follows the MVC (Model–View–Controller) design pattern, which separates the application into 
+three independent components for better maintainability and scalability.
+
+It separates:
+Model → Data (Java objects)
+View → JSP/HTML pages
+Controller → Handles requests
+
+MVC Architecture
+Browser
+   ↓
+DispatcherServlet (Front Controller)
+   ↓
+Controller
+   ↓
+Model/Data
+   ↓
+View (JSP)
+   ↓
+Response to Browser
+-------------------------------------------------------------
+2. DispatcherServlet (Front Controller)
+Theory :
+Heart of Spring MVC
+Receives all requests
+Routes them to correct controller
+
+Your Project Implementation
+Initializer.java
+public class Initializer 
+extends AbstractAnnotationConfigDispatcherServletInitializer
+
+Methods
+getServletConfigClasses()
+return new Class [] {MyConfig.class};
+→ Loads Spring configuration
+
+getServletMappings()
+return new String [] {"/"};
+→ All URLs handled by Spring
+
+Your Code
+MyConfig.java
+@Configuration
+@ComponentScan(basePackages = "com.first")
+
+Meaning
+@Configuration → tells Spring this is config class
+@ComponentScan → is used in Spring to automatically scan specified packages and 
+	register classes annotated with stereotypes like @Component, @Service, @Repository, 
+	or @Controller as beans in the IoC container. 
+-----------------------------------------------------------------------------------------
+3. @RequestMapping
+Theory
+Maps URL → method
+
+Example 1 (simple page navigation)
+@RequestMapping("/hii")
+public String sayHii() {
+    return "sample.jsp";
+}
+
+Flow
+/hii → sayHii() → sample.jsp
+--------------------------------------------------
+4. Reading Form Data Methods
+Your project shows 3 ways to read form data.
+
+Method 1 – HttpServletRequest (Old way)
+String name = req.getParameter("username");
+
+Problems:Manual conversion,Not recommended
+
+Method 2 – @RequestParam
+public String readData(
+    @RequestParam("username") String name,
+    @RequestParam("userage") int age)
+
+Advantages:Cleaner,Type conversion automatic.
+
+Method 3 – @ModelAttribute (BEST – used in your code)
+@RequestMapping("/read")
+public String readData(@ModelAttribute Person p)
+
+What happens internally?
+Spring:
+Creates Person object
+Reads form fields
+Calls setters
+Populates object automatically
+
+Your Model
+Person.java
+class Person {
+    String username;
+    int userage;
+    long userphono;
+    char usergender;
+}
+
+Matching rule
+Form input name must match variable name:
+username → setUsername()
+userage → setUserage()
+
+Advantages:Clean code,Automatic binding,Object oriented,Recommended
+----------------------------------------------------------------
+5. Sending Data to JSP
+Theory
+Controller → JSP using:
+request.setAttribute()
+
+Your Code
+req.setAttribute("username", "tom");
+
+Person p = new Person("lilly", 25, 9632587412L, 'f');
+req.setAttribute("myperson", p);
+
+return "display.jsp";
+-----------------------------------------------------------------
+6. View (JSP)
+View:
+Displays data
+HTML + JSP
+Receives attributes from controller
+--------------------------------------------------------------------
+7. Important Annotations Summary
+Annotation	Purpose
+@Controller	Marks controller
+@RequestMapping	Maps URL
+@ModelAttribute	Bind form → object
+@RequestParam	Bind single value
+@Configuration	Config class
+@ComponentScan	Auto scan beans
+@Autowired	Dependency injection
+---------------------------------------------------------------------------
+8. Advantages of MVC Pattern
+Separation of concerns
+Easy maintenance
+Code reusability
+Better testing
+Parallel development possible
+Loose coupling
+---------------------------------------------------------------------------
+9. Spring MVC Request Processing Lifecycle
+Step-by-step flow
+Step 1
+Client sends HTTP request
+Step 2
+DispatcherServlet receives request
+Step 3
+HandlerMapping finds controller
+Step 4
+Controller processes request
+Step 5
+Model data prepared
+Step 6
+View name returned
+Step 7
+ViewResolver finds JSP
+Step 8
+Response sent to client
+
+Diagram
+Browser
+   ↓
+DispatcherServlet
+   ↓
+HandlerMapping
+   ↓
+Controller
+   ↓
+Model
+   ↓
+ViewResolver
+   ↓
+View (JSP)
+   ↓
+Response
+-------------------------------------------------------------------
+10. Annotations in Spring MVC
+Spring MVC uses annotation-based configuration to reduce XML.
+
+@Controller:Marks class as controller
+@RequestMapping:Maps URL to method
+@RequestParam:Binds single request parameter to variable
+@ModelAttribute:Binds form data to object automatically
+@Configuration:Defines configuration class
+@ComponentScan:Scans packages for beans
+@Autowired:Performs dependency injection
+----------------------------------------------------------------------
+11. Data Binding in Spring MVC
+Definition
+Data Binding is the process of converting HTTP request parameters into Java objects automatically.
+
+Types
+1. Manual Binding
+Using HttpServletRequest
+(Not recommended)
+2. @RequestParam:For single value
+3. @ModelAttribute:For object binding (Best approach)
+
+Benefits
+ Reduces boilerplate code
+ Automatic conversion
+ Clean and readable
+----------------------------------------------------------------
+12. Form Handling in Spring MVC
+Steps
+User fills form
+Form submitted to controller
+Data bound to object
+Processing done
+Result sent to view
+
+Features
+ Automatic binding
+ Validation support
+ Error handling
+ Type conversion
+-----------------------------------------------------------------
+13. Limitations of Spring MVC
+More configuration compared to frameworks like Spring Boot
+JSP dependency (traditional apps)
+Slight learning curve
+-------------------------------------------------------------------
+14.Spring MVC vs Servlet
+Feature		Servlet		Spring MVC
+Coding		Manual		Automated
+Data binding	Manual		Automatic
+Architecture	No MVC		MVC
+Config		Complex		Easy
+Maintenance	Difficult	Easy
+------------------------------------------------------------------
+15.Frequently Asked Interview Questions
+What is Spring MVC?:A web framework that follows MVC pattern to build Java web applications.
+What is DispatcherServlet?:Front controller that handles all requests.
+
+Difference between @RequestParam and @ModelAttribute?
+@RequestParam → single value
+@ModelAttribute → object binding
+
+Why use MVC?:To separate concerns and improve maintainability.
+What is data binding?:Automatic mapping of request parameters to Java objects.
+What is view resolver?:Maps logical view names to actual view files.
+
+

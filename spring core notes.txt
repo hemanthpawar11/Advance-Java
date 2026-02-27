@@ -1,0 +1,607 @@
+SpringFramework
+
+-It is java based framework.
+-Developed by Rod Johnson in the year 2003.
+-Initially named as interface21.
+-It is considered as framework of frameworks as it provides support to other frameworks like Structs,EJB,Hibernate,JPA etc.
+
+-------------------------------------------------------
+Advantages of SpringFramework:
+
+-It is light weight open source framework.
+-It is called as Dependency Injection framework.
+-It is a powerfull abstraction tool.
+-It will provide 100% security for web application.
+-It can inject any no of dependencies.
+-Spring framework helps us to acheive loose coupling because of dependency injection.
+-Spring applications are easy to test due to dependency injection mechanism.
+-Since Spring framework supports other frameworks it is easy and faster to develop web applications.
+-SpringFramework provides predefined templates for JDBC,Hibernate,JPA etc. so there is no need to write too much of code.
+
+-------------------------------------------------------
+Dependency--is nothing but datamembers.
+Dependency injection--
+-It is a design pattern to inject the dependency(initialize the datamembers).
+-It is a technique in which an object receives other objects that it depends on.
+-It is fundamental aspect of spring framework.
+
+for example:-----Suppose class Car is dependent on class Engine,
+Now this can creates many problems in real world applications including system failure.
+Hence such dependencies needs to be avoided.
+Spring resolves such dependencies using dependency injection.
+Here it indicates that  class engine will be injected into class Car by spring.
+Dependency injection makes the code easy to test and reuse.
+While creating complex java application the classes should be independent of each other to improve possibility of reusing this classes and to test them independently.
+Dependency injection allows these classes to be together and at the same time keeps them independently.
+--------------------------------------------------------------
+IOC
+-IOC stands for Inversion of control--(control of object creation is given to spring itself rather than programmer creating the object hence called as Inversion of Control).
+-It is a process where spring framework will inject one object into another object (and it is done automatically by spring container at runtime dynamically). 
+-Thus ,IOC makes The code loosely coupled.In such case ,there is no need to modify the code if our logic is moved to new environment.
+-In spring framework ,IOC container is responsible for injecting dependency.
+--------------------------------------------------------------
+Spring Container--maintains lifecycle of Spring
+
+--They are of different types, one among them is Spring IOC container.
+--Key feature of IOC Container is Dependency Injection.
+--The spring IOC container is the core of spring framework.
+--IOC container will read the xml file/config class.
+--It creates object ,configure and manage the entire life cycle of that object.
+--The IOC container uses Dependency Injection to manage the components of the application.
+--We can provide information about object creation (configuration data) to the IOC container 
+--------------------------------------------------------------
+Spring App has 3 imp components:
+1.config class
+2.bean class
+3.Driver
+	To develop spring app ,components are not present in my JDK we need help of 3rd party api
+that is Spring Context API.
+Add Spring Contect dependency in pom.xml.
+--------------------------------------------------------------
+Prequisites to create  Spring Project:
+
+--Create simple maven project ,give package and project name.
+--Add Spring-Context dependency available in maven repository 
+--Create a classes in src/main/java , we can have any name  
+--------------------------------------------------------------
+Steps to work with Spring Framework
+
+1.Create a bean class ,declare datamembers as private and generate getters and setters.
+2.Create spring configuration class to configure the dependencies.
+3.Create a test-dependent class i.e driver class to check values are injected or not.
+--------------------------------------------------------------
+Types of dependencies:
+primitive dependency
+Collection dependency
+Reference Type--Has a relation.
+--------------------------------------------------------------
+We have different types of DI
+Setter DI
+Contructor DI
+
+Difference between setter and constructor injection
+
+1.It is a type of dependency  injection  where setter method is used to inject dependencies.
+
+It is a type of dependency  injection  where constructor is used to inject dependencies.
+
+2.property tag is used to inject dependencies.
+
+constructor-arg tag is used to inject dependencies.
+
+3.If any dependency is not injected by the user then that dependency is injected by the spring container implicitly with default values.
+
+User should inject all dependency explicitly.
+
+4.It is not mandatory to maintain the order while injecting dependencies.
+
+It is mandatory to maintain the order while injecting dependencies.
+
+-----------------------------------------------------------------------------------------
+configuration for object creation.
+
+@Component
+It is class level annotation which is used to create object og the class
+The class which is annotated with @Component annotation is also called as Component class.
+Spring container will create the object of Component class  and keep it in its container
+
+But we need tell to the Spring container where my component class is present.
+--------------------------------------------------------------
+Dependency injection using @Value annotation
+
+Pros:
+Integrated with Spring’s dependency injection system.
+Automatically pulls config values from external sources (properties/env).
+Good for centralized, static configuration (e.g., port, URLs, credentials).
+
+Cons:
+Not dynamic: Values are fixed when the application starts.
+You can’t easily change the values at runtime.
+Only one instance managed by Spring (singleton by default).
+
+@Value
+It is method/datamember level annotation.
+It is used to inject primitive dependencies.
+
+1.Directly on Datamember
+ex:
+@Value(value="10)
+int age;
+
+2.Setter DI
+ex:
+int age;
+	Person(@Value(value = "10") int age){
+		this.age=age;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+3.Constructor DI
+ex:
+	@Value(value = "10")
+	public void setAge(int age) {
+		this.age = age;
+	}
+--------------------------------------------------
+@Autowired
+It is used with reference type dependency.
+It identifies the bean automatically from container and injects the bean to specified Object.
+It can be used on variable,setter methods or constructor.
+-------------------------------------------------------
+Create a java class
+Annotate it with @Configuration
+In order to scan pakage to find component class we need to specify another annotation i.e.,
+@ComponentScan(basePackages = "packageName") below @Configuration
+
+In driver class we need to create the object for AnnotationConfigApplicationContext one of the subclass of  ApplicationContext  and specify the class name of configuration file in its constructor call.
+-----------------------------------------------------
+@ComponentScan
+It is an imp annotation which is used to specify the packages that we want to be scanned for object creation 
+------------------------------------------------------------------------
+Scope of bean
+It is single bean definition made to the spring bean.
+
+singleton-If the scope is singleton then spring container will create only one instance of bean and same instance is used for all request of that bean.
+
+prototype-If the scope is prototype then spring container will create 
+new instance for every request made.
+
+@Scope
+It is class level annotation.It must be used along with @Component.
+It specifies the scope of objects for the specified class.
+By default, the spring framework creates exactly one object for component class,which means by default component class is a singleton class.
+If we want to change the scope of the class to allow multiple objects to be created ,then we need to set the scope value as prototype.
+@Scope(value="prototype")
+-----------------------------------------------------
+Interface dependency Injection
+It is a type of dependency injection where interface is used to inject the dependencies (implementation class of an interface is used to inject the dependency).
+
+Steps:
+Create an interface
+Create implementation class
+Create spring config class
+Create Driver class
+
+---------------------------------------------------
+
+When we have reference dependency of interface and used @Autowired on it,Spring container will create object of its impementation class and do the dependency injection.
+
+When we have 2 implementation class for same interface here it will lead to NoUniqueBeanDefinitionException.
+
+To avoid this we use @Primary annotation on any one of the implementation class.
+
+@Primary is class level annotation used to prioratize one implementation class to inform spring container to inject object to interface type dependency. 
+------------------------------------------------------------
+@Bean
+
+it is method level annotation.
+
+When we predefined class whoes object has to be created by spring container then we cannot add @Component on that predefined class.
+
+Hence in config class we create a method which returns me that predefined class
+object.On that method we specify @Bean.
+So the spring container will understand to take object from config class and do the dependency injection.
+-------------------------------------------------------------
+--------------------------------------------------------------
+SPRING CORE – THEORY NOTES
+
+1. What is Spring Framework?
+Definition
+Spring is a lightweight, open-source Java framework used to build enterprise applications easily.
+
+It provides:
+Loose coupling
+Dependency Injection
+Better modularity
+Easy testing
+---------------------------------------------------------
+Loose Coupling in Spring 
+What is Coupling?
+Definition
+Coupling means the degree of dependency between two classes or modules.
+It shows how strongly one class is connected to another class.
+
+Types of Coupling
+There are two types:
+1.Tight Coupling
+2.Loose Coupling
+
+Tight Coupling
+Definition
+When one class directly creates and depends on another class, it is called Tight Coupling.
+
+Example (Without Spring)
+class Mobile {
+    void call() {
+        System.out.println("Calling...");
+    }
+}
+
+class Customer {
+    Mobile mob = new Mobile();   // tightly coupled
+
+    void usePhone() {
+        mob.call();
+    }
+}
+
+Problems
+Cannot change Mobile easily
+Hard to test
+Hard to maintain
+Code is rigid
+Reusability is low
+
+Suppose you want:
+Change Mobile → iPhone
+You must modify:Customer class
+Not good design
+
+Loose Coupling
+Definition
+When classes depend on abstraction (interface) instead of concrete implementation, it is called Loose Coupling.
+Objects are independent.
+
+Example (Using Interface)
+interface Mobile {
+    void call();
+}
+
+class Samsung implements Mobile {
+    public void call() {
+        System.out.println("Samsung calling");
+    }
+}
+
+class Nokia implements Mobile {
+    public void call() {
+        System.out.println("Nokia calling");
+    }
+}
+
+Now Customer
+class Customer {
+    Mobile mob;
+
+    Customer(Mobile mob) {
+        this.mob = mob;
+    }
+}
+
+No new keyword
+Depends only on interface
+With Spring (Best Example)
+@Component
+class Samsung implements Mobile { }
+
+@Component
+class Customer {
+
+    @Autowired
+    Mobile mob;   // Spring injects dependency
+}
+
+What happens internally?
+Spring:
+Creates Samsung object
+Creates Customer object
+Injects Samsung into Customer
+
+Flow Diagram
+Customer  →  Mobile (interface)
+                 ↑
+        Samsung / Nokia
+
+Spring chooses and injects
+
+Tight vs Loose Coupling Comparison
+Feature		Tight Coupling	Loose Coupling
+Dependency	Direct class	Interface
+Flexibility	Low		High
+Maintenance	Difficult	Easy
+Testing		Hard		Easy
+Reusability	Poor		Good
+Spring DI	Not used	Used
+
+Real-Time Example:
+Tight Coupling
+Car → PetrolEngine
+If engine changes → Car must change 
+
+Loose Coupling
+Car → Engine (interface)
+PetrolEngine / DieselEngine / ElectricEngine
+Change engine easily 
+
+How Spring Achieves Loose Coupling?
+Spring uses:
+1. IOC
+Spring creates objects
+2. Dependency Injection
+Spring injects objects
+3. Interfaces
+Depend on abstraction
+4. @Autowired
+Automatic wiring
+
+Key Interview Definition
+Short Answer:Loose Coupling means reducing dependency between classes by using interfaces and dependency injection.
+One-line Answer:Classes depend on interfaces, not implementations.
+
+Advantages of Loose Coupling
+Easy to change implementation
+Easy testing (mock objects)
+Easy maintenance
+Reusable code
+Flexible design
+Better scalability
+------------------------------------------------------------------------------
+2. What is Spring Core?
+Spring Core is the foundation module of Spring.
+
+It provides:
+IOC (Inversion of Control)
+Dependency Injection (DI)
+Bean management
+Container support
+
+Without Spring Core → other modules cannot work.
+-------------------------------------------------------------
+3. What is IOC (Inversion of Control)?
+Definition
+IOC means:Object creation and management is done by Spring, not by the programmer.
+
+Without IOC (Traditional Java)
+Mobile m = new Mobile();
+Customer c = new Customer(m);
+
+Programmer creates objects manually → Tight coupling
+With IOC (Spring)
+@Autowired
+Mobile mob;
+
+Spring creates and injects objects automatically → Loose coupling 
+
+Benefits of IOC
+Reduces dependency
+Easy maintenance
+Easy testing
+Code becomes flexible
+-------------------------------------------------------------------
+4. Spring Container
+Definition:Spring Container is responsible for:
+Creating objects (beans)
+Injecting dependencies
+Managing lifecycle
+
+Types of Containers
+1️.BeanFactory
+Basic container
+Lazy initialization
+Lightweight
+
+2️.ApplicationContext (Mostly used)
+Advanced container
+Eager initialization
+More features
+
+Example:
+AnnotationConfigApplicationContext context =
+    new AnnotationConfigApplicationContext("com.first");
+------------------------------------------------------------
+5. What is a Bean?
+Definition
+A Bean is:
+An object that is created and managed by Spring container.
+
+Example
+@Component
+public class Apple { }
+
+Apple object → Bean
+------------------------------------------------------------
+6. Ways to Create Beans
+Method 1 → @Component
+Meaning:Automatically creates bean using component scanning.
+
+Example
+@Component
+public class Mobile { }
+
+Used for
+Our own classes
+
+Method 2 → @Bean
+Meaning:Manual bean creation inside configuration class.
+
+Example
+@Bean
+public Scanner scanner() {
+    return new Scanner(System.in);
+}
+
+Used for
+Third-party classes
+Inbuilt classes
+Collections
+When source code cannot be modified
+
+Difference: @Component vs @Bean
+Feature		@Component	@Bean
+Type		Automatic	Manual
+Location	Class		Method
+Use		Our classes	External classes
+----------------------------------------------------------
+7. @Configuration
+Definition
+Marks a class as:
+Spring configuration class
+
+Example:
+
+@Configuration
+public class MyConfig { }
+
+Used to define:@Bean methods
+Application settings
+-----------------------------------------------
+8. Dependency Injection (DI)
+Definition
+DI means::Supplying required objects to another object automatically.
+
+Example
+Customer needs Mobile
+Instead of:
+Customer creates Mobile
+
+Spring:Spring gives Mobile to Customer
+-----------------------------------------------------
+9. Types of Dependency Injection
+1.Field Injection
+@Autowired
+Mobile mob;
+
+Pros: Easy
+Cons:Hard to test,Not recommended
+
+2️.Setter Injection
+@Autowired
+public void setMobile(Mobile m)
+
+Pros:Optional dependencies
+
+3️.Constructor Injection (BEST PRACTICE)
+@Autowired
+public Customer(Mobile m)
+
+Pros
+✔ Mandatory dependencies
+✔ Safe
+✔ Test friendly
+✔ Recommended
+------------------------------------------------------
+10. @Autowired
+Definition :Automatically injects dependency by type.
+
+Example:
+@Autowired
+Mobile mob;
+
+Spring searches:Bean of type Mobile
+---------------------------------------------
+11. @Value
+Definition:Injects primitive values or constants.
+
+Example:
+
+@Value("101")
+int id;
+---------------------------------------------
+13. @Qualifier
+Definition:Specifies exact bean name.
+
+Example:
+
+@Autowired
+@Qualifier("second")
+ArrayList list;
+
+Meaning:Inject bean named "second"
+-------------------------------------------
+14. @Primary
+Definition:Marks default bean among multiple beans.
+
+Example:
+
+@Primary
+@Component
+public class Samsung implements Mobile
+
+Meaning:If multiple Mobile beans exist → Samsung is default
+
+Difference: @Primary vs @Qualifier
+Feature		@Primary	@Qualifier
+Selection	Default		Specific
+Usage		Class level	Field level
+----------------------------------------------
+15. Interface-Based Injection
+Why use interface?
+Loose coupling
+Easy replacement
+Better design
+
+Example:
+
+Mobile mob;
+Implementations:Nokia & Samsung
+
+Spring injects based on:
+
+@Primary OR @Qualifier
+------------------------------------------------
+17. Advantages of Spring Core
+Loose coupling
+Less boilerplate code
+Easy testing
+Modular design
+Better maintainability
+Easy configuration
+---------------------------------------------------
+18. Real-Time Flow Diagram (Concept)
+Without Spring
+Customer → new Mobile()
+
+With Spring
+Spring Container
+      ↓
+Creates Mobile
+      ↓
+Injects into Customer
+------------------------------------------------
+19. Quick Revision Table
+Concept		Purpose
+IOC		Object creation by Spring
+Bean		Managed object
+@Component	Auto bean
+@Bean		Manual bean
+@Autowired	Inject dependency
+@Value		Inject constants
+@Qualifier	Choose specific bean
+@Primary	Default bean
+ApplicationContext	Container
+--------------------------------------------
+20. Interview Questions for Students
+
+What is IOC?
+What is DI?
+Difference between @Component and @Bean?
+What is @Autowired?
+Types of DI?
+Why constructor injection is best?
+What is @Qualifier?
+What is @Primary?
+What is Spring container?
+What is a bean?

@@ -24,46 +24,55 @@ mock ratings...
 2.task--done and shared on qtalk
 http://3.final assesment 
 
+Dec 25 - 7:38 am
 eclipse link to download 
 
+Dec 26 - 7:11 am
 https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-09/R/eclipse-jee-2024-09-R-win32-x86_64.zip 
 
+Dec 26 - 7:11 am
+1.txt
+Click to download
+Dec 26 - 8:54 am
+do revise this and come for tomorrow class 
 
+Dec 26 - 8:56 am
+Mam can you send today notes  
+
+Dec 27 - 9:11 am
+2.txt
+Click to download
+Dec 27 - 12:12 pm
 mysql video for installation:
-
 https://youtu.be/Sfvpgu9ID2Q?si=BtoKgWUpam88a8VA
 https://youtu.be/vQPBNCvboSo?si=eiXxmjsjwa8729ZW
 
 unistall video:https://youtu.be/lRPyHZ1hRLU?si=Sm1TSyQ1gpZlLqwb 
 
+Dec 27 - 12:13 pm
+3.txt
+Click to download
+Dec 29 - 4:02 pm
+https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-09/R/eclipse-jee-2024-09-R-win32-x86_64.zip 
 
+Dec 29 - 4:02 pm
+mysql video for installation:
+https://youtu.be/Sfvpgu9ID2Q?si=BtoKgWUpam88a8VA
+https://youtu.be/vQPBNCvboSo?si=eiXxmjsjwa8729ZW
 
-/*
- * use object of PrintWriter class present in http://java.io pkg
- * getWriter() present in HttpServletResponse
- * non static method --gives you object of PrintWriter
- */
-/*
- * servlet class : should have properties of server
- * --have a unique url : @WebServlet("/give url")
- * '/' is mandatory ,if you miss this ,server will not get started
- * give this annotation above the class
- * --take req and send response
- * inherit a inbuilt class called HttpServlet class present in
- * javax.servlet pkg
- * override doGet() Method and specify our code
- * 
- * 
- * to execute servlet class
- * 1.start the server
- * 2.give the url of your class in browser
- * 		[http://localhost:8080/servlets-first/apple]
- */ 
+unistall video:https://youtu.be/lRPyHZ1hRLU?si=Sm1TSyQ1gpZlLqwb 
 
+ 
 
+Dec 29 - 4:02 pm
+4.txt
+Click to download
 
+Dec 30 - 11:57 am
+You do have class tomorrow ,do attend.. 
 
-Create servlet web app maven project  employee-servlet-jdbc .
+Dec 31 - 9:52 pm
+ Create servlet web app maven project  employee-servlet-jdbc .
 Add servlet and mysql dependency.
 Create a database called employee-servlet-jdbc.
 Create a table called employee with columns id,name,email,password,salary.
@@ -86,55 +95,39 @@ if not---login failure----display same login form again
  
 
 Jan 12 - 8:29 am
+servlet-jsp notes.txt
 
+Click to download
+Jan 13 - 9:36 am
 
-* in jdbc 5 steps
- * in hibernate 3 steps : javax.persistence pkg
- * we have create 3 objects
- * all 3 are interface
- * 1.EntityManagerFactory--1st and 2nd step
- * call createEntityManagerFactory("vikas") : present in Persistence class
- * static method
- * String argument : persistence unit name(find it in persistence.xml file)
- * give object of EntityManagerFactory
- * 
- * 2.EntityManager----3rd step
- * call createEntityManager() : present in EntityManagerFactory
- * non static method
- * give EntityManager object
- * inbuilt methods to perform crud operation
- * insert--persist()
- * update--merge()
- * delete--remove()
- * fetch---find()
- * customized query---createQuery()
- * 
- * 3.EntityTransaction---4th and 5th step
- * call getTransaction() : present in EntityManager
- * non static method
- * 2 imp method
- * begin()----start the operation
- * commit()---save the operation done
- * 
- * 
- * Entity Class : hibernate create table
- * Rules to create an Entity class
---class should be annotated with @Entity
---entity class must have one primary key( id )to a row  for easy identification of objects  and annotated with @Id 
---class must be public non abstract class.
---class should have public zero parameterized constructor or public default constructor.
---for every variable of entity class there should be public getter and setter methods.
+hibernate config.txt
+Click to download
 
- 
-
-Jan 19 - 7:06 am
+Jan 14 - 7:35 am
+6.txt
+Click to download
 
 
 
+Jan 25 - 10:32 pm
+5.txt
+Click to download
+
+jdbc-notes.txt
+Click to download
+
+Jan 28 - 4:19 pm
+ServletProjectCreationSteps.pdf
+Click to download
 
 
+Jan 31 - 6:11 pm
+application has a issue....do wait people.... 
 
+Feb 02 - 7:07 pm
+Its been resolved... do join the session 
 
+Feb 02 - 7:14 pm
 Dear Students,
 
 This is to inform you that you will be attending an **online quiz** tomorrow(4/02/2026) as per the schedule mentioned below. Kindly read all the instructions carefully and follow them strictly.
@@ -167,14 +160,42 @@ All students are requested to be punctual and complete the quiz within the given
  
 
 Feb 03 - 10:49 pm
+servlet-notes.txt
 
+Click to download
+Feb 04 - 6:59 pm
+jsp notes.txt
+
+Click to download
+Feb 04 - 9:05 pm
+hibernate config.txt
+
+
+Feb 09 - 8:46 pm
+No 7pm class today … 
+
+Feb 13 - 6:27 pm
+no 7pm class today (monday) 
+
+Feb 16 - 6:38 pm
+hibernate-notes.txt
+
+Click to download
+Feb 17 - 12:53 pm
+
+spring core notes.txt
+Click to download
+
+Feb 19 - 8:57 pm
+mvc notes.txt
+
+Click to download
+Feb 21 - 8:55 pm
 
 for spring boot , do install below apps 
 
 Feb 21 - 8:55 pm
-Spring tool suite :  https://youtu.be/-bBofV8jzZo?si=z3euqxYSbe6i_SSl
-postman download :  https://www.postman.com/downloads/ 
-
-
+Spring tool suite :https://youtu.be/-bBofV8jzZo?si=z3euqxYSbe6i_SSl
+postman download :https://www.postman.com/downloads/ 
 
 
