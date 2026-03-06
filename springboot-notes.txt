@@ -1,0 +1,282 @@
+Springboot
+
+-Spring Boot is a project that is built on the top of the Spring Framework.
+-It provides an easier and faster way to set up, configure, and run both simple and web-based applications.
+-It is a Spring module that provides the RAD (Rapid Application Development) feature to the Spring Framework. 
+
+-Springboot is used to develop web service.
+-WebApplication:Any application accessed with the help of internet(data+stylecode).
+-WebService:a service which is accessed over an internet(only data)
+-All web service are web application but all web application are not web services.
+--------------------------------------------------------------------------------
+To bulid web service we need to follow certain rules or architecture
+we use REST architecture.
+REST stands for Representational State Transfer
+when we develop web service using REST we call it as Restfull web service.
+
+REST API
+-Also called as RestFul API
+-Basic function of REST API is same as browsing the internet.The client contacts the server by using the API whenever it requires a resources.
+-A REST API is a way for two systems to communicate using the http technologies.
+-REST API uses only HTTP Requests.
+-A REST API can accept HTTP request like get,post,delete,put etc and send back HTTP response.
+-----------------------------------------------------------------------------
+Why should we use Spring Boot Framework?
+-The dependency injection approach is used in Spring Boot.
+-It contains powerful database transaction management capabilities.
+-It simplifies integration with other Java frameworks like JPA/Hibernate ORM, Struts, etc.
+-It reduces the cost and development time of the application.
+-Springboot contains all the functionality of spring framework which means application
+development is much easier.
+------------------------------------------------------------------------------
+Difference between Spring and SpringBoot
+1.Spring Framework is used to build applications like StandAlone application.
+	Spring boot framework is used mainly to develop REST API
+2.The main feature of spring framework is dependency injection.
+	The main feature of spring boot framework is auto configuration.
+3.To run spring application we need to configure the servers explicitly.
+	springboot offers built in servers such as Tomcat.
+4.spring framework requires too many lines of code even for minimal task.
+	we can avoid biolerplate code in springboot which reduces the code size as well as the development time.
+5.Testing the spring application is difficult due to large amount of source code.
+	Testing the springboot application is easy due to reduced code size.
+6.In spring framework configuration is required either through annotation ot through xml files
+	There is no need for any xml configuration.
+
+-----------------------------------------------------------------------
+Spring boot helps to develop web service:
+-To design web service we need to create endpoints.
+-Endpoints are nothing but url.
+-To create end points we need to create controller class in springboot application.
+-Any class annotated with @RestController is controller class.
+
+How springboot works?
+-When request comes ,request object will contain some url.
+-Now spring container will go and look controller class,checks for any method is mapped for that url in the request.
+-In controller class we are going to create mapping,each url will have different mapping.
+-If mapping is present then it will trigger that method.
+---------------------------------------------------------------------------------
+To do Mapping we have multiple annotations
+
+Annotation--------Purpose of method----Annotation
+@GetMapping----To get the data-----GET
+@PostMapping---To save the data---POST
+@PutMapping----To update data-----PUT
+@DeleteMapping--To delete data-----DELETE
+-----------------------------------------------------------------------------
+Trigger the end point:
+-When we create springboot application by default there is Driver class annotated with @SpringBootApplication where the springboot application starts from.
+-Execute the driver class and go to browser and the url as
+http://localhost:/8080/<url> 
+this will trigger particular method and you'll get the output.
+----------------------------------------------------------------------------
+Pass Value using Query String
+
+QueryString is piece of info which is going to travel along with url.
+
+EX:
+url--http://localhost:8080/message?id=101&name=allen
+
+@GetMapping("/message")
+public String message(@RequestParam int id,@RequestParam String name) 
+{
+		return "my id is:"+id+" and name is:"+name;
+}
+
+----------------------------------------------------------------------------------
+Pass value using path variable
+
+EX:
+url-----http://localhost:8080/value/101/allen
+
+@GetMapping("/value/{id}/{name}")
+public String value(@PathVariable int id,@PathVariable String name) 
+{
+		return "my id is:"+id+" and name is:"+name;
+} 
+--------------------------------------------------------------------------------
+JSON-JavaScript Object Notation
+JSON objects are used while sharing the data because it is light weighted simple object.
+It is easy to parse to respective language object.
+They are well structured objects. 
+
+How to create json object?
+Syntax:{
+	//stored in key value pair
+}
+
+Ex:
+class Student{
+int roll;
+String name;
+double height;
+}
+
+json object:
+{
+"roll":101,
+"name":"allen",
+"height":5.5
+}
+----------------------------------------------------------------------
+Pass object using @RequestBody
+
+class Student{
+int roll;
+String name;
+double height;
+//getters & setters
+}
+
+@RestController
+public class TestController {
+@PostMapping("/save")
+	public String saveStudent(@RequestBody Student student) {
+		return "Student name is:"+student.getName();
+	}
+}
+
+Run the driver class
+Go to postman
+select method type to post and give url http://localhost:8080/save
+go to body--raw ,in text select json
+Type as:
+{
+"roll":101,
+"name":"allen",
+"height":5.5
+}
+
+Send the request
+------------------------------------------------------------------------------
+SpringBoot project with database:
+
+1.Create springboot project and add following dependencies
+-Spring web
+-Spring data Jpa----to interact with database
+-MySql Driver
+2.In src/main/resources ,we need add all database configuration information.
+3.Create an entity class and generate getters and setters
+4.To connect the entity class to database repository ,i need to create an interface which extends JpaRepository<EntityClass,TypeOfPrimaryKey>.
+JpaRepository gives us inbuilt methods to perform transaction in database.
+5.Create controller class and generate endpoints to perform CRUD operations.
+
+
+@Entity
+@Getter
+@Setter
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String name;
+	private double salary;
+	private String location;
+}
+
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
+
+}
+
+@RestController
+public class EmployeeController {
+	@Autowired
+	EmployeeRepository repository;
+
+	@PostMapping("/save")
+	public String saveEmployee(@RequestBody Employee employee){
+		repository.save(employee);
+		return structure;
+	}
+
+}
+------------------------------------------------------------------------------
+Annotations of springboot framework
+
+@SpringBootApplication:
+-It is used to mark a configuration class that triggers autoconfiguration and automatic component scanning.
+-It is a combination of of @Configuration,@ComponentScan and
+@EnableAutoConfiguration.
+-This annotation will make the springboot to automatically configure the application based on the dependencies as well as the properties specified in the application.properties file.
+-It should be used on the class with main method.
+
+@Entity:
+-It will create table for the class
+
+@Id:
+-It will specify the primary key.
+
+@GeneratedValue:
+-Generates unique value for primary key automatically
+
+@Autowired:
+It is reponsible for automatic dependency injection.
+
+@Controller:
+-It indicates the particular class is a controller class.
+-It can be applied to classes only and it is used at presentation layer.
+-The controller annotation is used with combination of @RequestMapping annotation.
+-If we annotate a class with @Controller then we have to use @ResponseBody annotation.
+-@ResponseBody annotation is used to convert java object into the reponse inthe form which the client is expecting like JSON.
+
+@RestController:
+-It is a combination of @Controller and @ResponseBody
+-It is used for developing Restful web services.
+-It can be applied to classes only and is used in presentation layer.
+
+@PostMapping:
+-It maps the http post request on the specific handler method.
+-It is used to create a web service end point that creates.
+
+@GetMapping:
+-It maps the http get request on the specific handler method.
+-It is used to create a web service end point that fetches.
+
+@DeleteMapping:
+-It maps the http delete request on the specific handler method.
+-It is used to create a web service end point that deletes a resource.
+
+@PutMapping:
+-It maps the http put request on the specific handler method.
+-It is used to create a web service end point that updates.
+
+@RequestBody:
+-It is used to bind the incoming http request body(onject) to a method parameter.
+-It is used to automatically convert the http request body sent by the client in JSON format into a java object.
+
+@RequestParam:
+-It is used to extract the query parameters from the url.
+
+----------------------------------------------------------------------------
+JpaRepository:
+-It is an interface that contains the APIs for performing operations like insertion,deletion,updation,retrieving the data etc.
+Syntax:
+JpaRepository<T,Id>
+T-Entity class name whose objects will be managed by JpaRepository.
+Id-The corresponding wrapper class of the value which is annotated with @Id in the entity class.
+
+Methods of JpaRepository:
+
+-save(object):It is used to insert an object into the database.
+-findAll():It is used to retrieve all the objects from the database.
+	It returns the objects stored in List(of java.util package).
+-deleteById(int):It allows us to delete an object from the database based on id value.
+-delete(object):It is used to delete specific object.
+-findById(int):It is used to retrieve an object from the database based on the id value.
+	Object will be returned in the form of Optional.
+Optional is a class introduced in Java8  version.
+It is used to store not null values.
+
+Optional class has methods like:
+.isPresent():it will return true is the object is present else returns false.
+.isEmpty():it will return true if the object is not present else returns false.
+.get():it returns the value present in the optional object.
+
+---------------------------------------------------------------------------------------
+Postman
+-It is an API platform for the developers to design ,build and test their APIs.
+-It is one of the most popular software testing tool used forn API testing.
+-It is a simple graphic user interface for sending http request and viewing the http response.
+-This tool has an ability to make various http request like get,post,put,delete etc and convert the API into code for languages like java,javascript,python etc.
+-----------------------------------------------------------------------------------------
